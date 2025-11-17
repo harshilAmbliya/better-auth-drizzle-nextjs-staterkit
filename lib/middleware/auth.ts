@@ -4,7 +4,7 @@
  * Helper functions for protecting routes and checking authentication
  */
 
-import { auth } from "@/libs/auth";
+import { auth } from "@/lib/auth";
 import { UnauthorizedError } from "@/lib/utils/errors";
 import { headers } from "next/headers";
 
