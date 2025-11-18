@@ -23,6 +23,10 @@ function getEnvVar(key: string, defaultValue?: string): string {
  * Access these instead of process.env directly for type safety
  */
 export const env = {
+  // Google
+  // GOOGLE_CLIENT_ID: getEnvVar("GOOGLE_CLIENT_ID"),
+  // GOOGLE_CLIENT_SECRET: getEnvVar("GOOGLE_CLIENT_SECRET"),
+  
   // Database
   DATABASE_URL: getEnvVar("DATABASE_URL"),
   

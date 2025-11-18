@@ -8,7 +8,7 @@ import { createAuthClient } from "better-auth/react";
  * @example
  * ```tsx
  * 'use client';
- * import { authClient } from '@/libs/auth-client';
+ * import { authClient } from '@/lib/auth-client';
  * 
  * const { data: session } = await authClient.getSession();
  * ```

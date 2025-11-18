@@ -7,7 +7,7 @@ export const posts = pgTable(
     id: uuid("id").defaultRandom().primaryKey(),
     name: text("name").notNull(),
     description: text("description"),
-    userId: uuid("user_id").notNull(),
+    userId: text("user_id").notNull(), // Changed to text to match users.id
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },

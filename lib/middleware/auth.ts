@@ -7,6 +7,7 @@
 import { auth } from "@/lib/auth";
 import { UnauthorizedError } from "@/lib/utils/errors";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 /**
  * Get the current session from the request
@@ -34,6 +35,23 @@ export async function requireAuth() {
   
   if (!session) {
     throw new UnauthorizedError("You must be authenticated to access this resource");
+  }
+  
+  return session;
+}
+
+/**
+ * Require authentication and redirect to login if not authenticated
+ * Use this in page components where you want to redirect unauthorized users
+ * 
+ * @param redirectTo - The path to redirect to (default: "/login")
+ * @returns The session if authenticated
+ */
+export async function requireAuthAndRedirect(redirectTo: string = "/login") {
+  const session = await getSession();
+  
+  if (!session) {
+    redirect("/login");
   }
   
   return session;
