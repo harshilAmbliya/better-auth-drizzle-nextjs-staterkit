@@ -6,7 +6,7 @@ import SignoutButton from "@/components/sign-out";
 
 export default async function Home() {
   // Redirect to login if not authenticated
-  await requireAuthAndRedirect();
+  // await requireAuthAndRedirect();
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
