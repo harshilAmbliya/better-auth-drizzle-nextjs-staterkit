@@ -78,17 +78,32 @@ Open [http://localhost:3005](http://localhost:3005)
 ├── db/                     # Database
 │   ├── index.ts           # Drizzle instance & utilities
 │   └── schema/            # Database schemas
-│       ├── index.ts
-│       └── users.ts
-├── lib/                    # Shared utilities
+│       ├── tables/        # Main application tables
+│       │   ├── posts.ts
+│       │   ├── comments.ts
+│       │   ├── profiles.ts
+│       │   ├── tags.ts
+│       │   ├── roles.ts
+│       │   └── ... (main tables)
+│       ├── mappings/       # Many-to-many tables
+│       │   ├── postsTags.ts
+│       │   ├── usersRoles.ts
+│       │   └── ... (many-to-many tables)
+│       ├── relations/     # Relation definitions
+│       │   ├── users.relations.ts
+│       │   ├── posts.relations.ts
+│       │   ├── comments.relations.ts
+│       │   └── ... (one-to-many / many-to-one here)
+│       ├── index.ts        # Schema exports
+│       └── auth-schema.ts  # Better Auth required tables
+├── lib/                    # Shared utilities & configurations
 │   ├── middleware/        # Middleware helpers
 │   │   └── auth.ts        # Auth middleware
-│   └── utils/             # Utility functions
-│       ├── api-response.ts
-│       └── errors.ts
-├── libs/                   # Library configurations
+│   ├── utils/             # Utility functions
+│   │   ├── api-response.ts
+│   │   └── errors.ts
 │   ├── auth.ts            # Better Auth server config
-│   └── auth-client.ts     # Better Auth client config
+│   └── auth-client.ts      # Better Auth client config
 ├── scripts/                # Utility scripts
 │   └── seed-users.ts      # Database seeding
 └── drizzle/               # Migration files

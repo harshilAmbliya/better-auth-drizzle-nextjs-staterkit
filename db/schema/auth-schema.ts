@@ -1,5 +1,7 @@
 import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
 
+// Forward reference for role (will be defined in tables/roles.ts)
+// We'll add the foreign key reference in the relations file
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
@@ -11,6 +13,8 @@ export const user = pgTable("user", {
   address: text("address"),
   bio: text("bio"),
   gender: text("gender"),
+  roleId: text("role_id"), // User has one role (user, admin, super_admin, etc.)
+  // Foreign key reference will be handled in relations
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
