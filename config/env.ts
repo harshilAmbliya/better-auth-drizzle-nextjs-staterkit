@@ -38,6 +38,17 @@ export const env = {
   NODE_ENV: getEnvVar("NODE_ENV", "development"),
   PORT: getEnvVar("PORT", "3005"),
   
+  // Resend
+  RESEND_API_KEY: getEnvVar("RESEND_API_KEY"),
+
+  // Google
+  GOOGLE_CLIENT_ID: getEnvVar("GOOGLE_CLIENT_ID"),
+  GOOGLE_CLIENT_SECRET: getEnvVar("GOOGLE_CLIENT_SECRET"),
+
+  // GitHub
+  GITHUB_CLIENT_ID: getEnvVar("GITHUB_CLIENT_ID"),
+  GITHUB_CLIENT_SECRET: getEnvVar("GITHUB_CLIENT_SECRET"),
+  
   // Helper functions
   isDevelopment: () => env.NODE_ENV === "development",
   isProduction: () => env.NODE_ENV === "production",
