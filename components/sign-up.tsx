@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { authClient } from '@/lib/auth-client'
+import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -18,8 +19,10 @@ interface SignUpInfo {
 export default function SignUp() {
     const [signUpInfo, setSignUpInfo] = useState<SignUpInfo | null>(null);
 
+    const { isPending } = authClient.useSession()
+
     const handleSignUpClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        
+
         e.preventDefault()
         console.log(signUpInfo)
 
@@ -32,6 +35,7 @@ export default function SignUp() {
             password: signUpInfo?.password,
             name: `${signUpInfo?.firstname} ${signUpInfo?.lastname}`,
             callbackURL: "/login",
+            
         })
 
         if (response.error) {
@@ -133,7 +137,8 @@ export default function SignUp() {
                             />
                         </div>
 
-                        <Button className="w-full" onClick={handleSignUpClick}>Sign Up</Button>
+                        <Button className="w-full cursor-pointer" onClick={handleSignUpClick} disabled={isPending}> {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Sign Up'}</Button>
+                        
                     </div>
 
                     <div className="my-6 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
@@ -198,7 +203,7 @@ export default function SignUp() {
                         <Button
                             asChild
                             variant="link"
-                            className="px-2">
+                            className="px-2 cursor-pointer">
                             <Link href="/login">Sign In</Link>
                         </Button>
                     </p>

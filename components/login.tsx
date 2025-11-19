@@ -93,7 +93,7 @@ export default function Login() {
                             />
                         </div>
 
-                        <Button className="w-full" onClick={handleLoginClick}>Sign In</Button>
+                        <Button className="w-full cursor-pointer" onClick={handleLoginClick}>Sign In</Button>
                     </div>
 
                     <div className="my-6 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
@@ -158,7 +158,7 @@ export default function Login() {
                         <Button
                             asChild
                             variant="link"
-                            className="px-2">
+                            className="px-2 cursor-pointer">
                             <Link href="/signup">Create account</Link>
                         </Button>
                     </p>

@@ -17,6 +17,6 @@ export default function SignoutButton() {
 		}
 	}
 	return (
-		<Button onClick={handleSignOut}>Sign Out</Button>
+		<Button className="cursor-pointer" onClick={handleSignOut}>Sign Out</Button>
 	)
 }
