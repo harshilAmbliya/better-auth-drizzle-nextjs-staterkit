@@ -6,7 +6,6 @@ import { Button } from "./ui/button"
 export default function SignoutButton() {
 	const handleSignOut = async () => {
 		const response = await authClient.signOut()
-		debugger
 		if (response.data?.success) {
 			window.location.href = '/login'
 		} else {

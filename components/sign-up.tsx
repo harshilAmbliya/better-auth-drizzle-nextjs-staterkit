@@ -18,8 +18,7 @@ interface SignUpInfo {
 
 export default function SignUp() {
     const [signUpInfo, setSignUpInfo] = useState<SignUpInfo | null>(null);
-
-    const { isPending } = authClient.useSession()
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSignUpClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 
@@ -30,16 +29,23 @@ export default function SignUp() {
     }
 
     const signUpUsers = async (signUpInfo: SignUpInfo) => {
-        const response = await authClient.signUp.email({
-            email: signUpInfo?.email,
-            password: signUpInfo?.password,
-            name: `${signUpInfo?.firstname} ${signUpInfo?.lastname}`,
-            callbackURL: "/",
-        })
-        if (response.data?.user) {
-            window.location.href = "/"
-        } else {
-            console.error(response.error)
+        setIsLoading(true)
+        try {
+            const response = await authClient.signUp.email({
+                email: signUpInfo?.email,
+                password: signUpInfo?.password,
+                name: `${signUpInfo?.firstname} ${signUpInfo?.lastname}`,
+                callbackURL: "/",
+            })
+            if (response.data?.user) {
+                window.location.href = "/"
+            } else {
+                console.error(response.error)
+            }
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -135,7 +141,7 @@ export default function SignUp() {
                             />
                         </div>
 
-                        <Button className="w-full cursor-pointer" onClick={handleSignUpClick} disabled={isPending}> {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Sign Up'}</Button>
+                        <Button className="w-full cursor-pointer" onClick={handleSignUpClick} disabled={isLoading}> {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Sign Up'}</Button>
                         
                     </div>
 
