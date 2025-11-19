@@ -34,14 +34,12 @@ export default function SignUp() {
             email: signUpInfo?.email,
             password: signUpInfo?.password,
             name: `${signUpInfo?.firstname} ${signUpInfo?.lastname}`,
-            callbackURL: "/login",
-            
+            callbackURL: "/",
         })
-
-        if (response.error) {
-            console.error(response.error)
+        if (response.data?.user) {
+            window.location.href = "/"
         } else {
-            console.log(response.data)
+            console.error(response.error)
         }
     }
 

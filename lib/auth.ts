@@ -29,16 +29,6 @@ export const auth = betterAuth({
   //       clientSecret: env.GOOGLE_CLIENT_SECRET,
   //     },
   // },
-  hooks: {
-    before: async (inputContext) => {
-      return inputContext;
-    },
-    after: async (inputContext) => {
-      // Client-side sign out handles preventing auto-login after signup
-      // This hook is kept for potential server-side session management if needed
-      return inputContext;
-    },
-  },
   baseURL: env.BETTER_AUTH_URL,
   secret: env.BETTER_AUTH_SECRET,
   plugins: [

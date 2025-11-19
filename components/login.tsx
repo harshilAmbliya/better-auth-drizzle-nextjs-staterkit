@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { authClient } from '@/lib/auth-client'
+import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -14,21 +15,30 @@ interface LoginInfo {
 
 export default function Login() {
     const [loginInfo, setLoginInfo] = useState<LoginInfo | null>(null);
+    const { isPending,isRefetching } = authClient.useSession()
+    const [isLoading, setIsLoading] = useState(false)
     const handleLoginClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         console.log(loginInfo)
         loginUsers(loginInfo as LoginInfo)
     }
     const loginUsers = async (loginInfo: LoginInfo) => {
-        const response = await authClient.signIn.email({
-            email: loginInfo?.email,
-            password: loginInfo?.password,
-            callbackURL: "/",
-        })
-        if (response.error) {
-            console.error(response.error)
-        } else {
-            console.log(response.data)
+        setIsLoading(true)
+        try {
+            const response = await authClient.signIn.email({
+                email: loginInfo?.email,
+                password: loginInfo?.password,
+                callbackURL: "/",
+            })
+            if (response.data?.user) {
+                window.location.href = "/"
+            } else {
+                console.error(response.error)
+            }
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setIsLoading(false)
         }
     }
    
@@ -93,7 +103,7 @@ export default function Login() {
                             />
                         </div>
 
-                        <Button className="w-full cursor-pointer" onClick={handleLoginClick}>Sign In</Button>
+                        <Button className="w-full cursor-pointer" onClick={handleLoginClick} disabled={isLoading}> {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Sign In'}</Button>
                     </div>
 
                     <div className="my-6 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
